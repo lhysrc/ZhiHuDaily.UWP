@@ -242,9 +242,12 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "PullToRefresh.UWP/0.3.3": {
+      "NotificationsExtensions/1.0.0": {
         "compile": {
-          "ref/uap10.0/PullToRefresh.UWP.winmd": {}
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
+        },
+        "runtime": {
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -1877,9 +1880,12 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "PullToRefresh.UWP/0.3.3": {
+      "NotificationsExtensions/1.0.0": {
         "compile": {
-          "ref/uap10.0/PullToRefresh.UWP.winmd": {}
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
+        },
+        "runtime": {
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -3545,9 +3551,12 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "PullToRefresh.UWP/0.3.3": {
+      "NotificationsExtensions/1.0.0": {
         "compile": {
-          "ref/uap10.0/PullToRefresh.UWP.winmd": {}
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
+        },
+        "runtime": {
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -5218,9 +5227,12 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "PullToRefresh.UWP/0.3.3": {
+      "NotificationsExtensions/1.0.0": {
         "compile": {
-          "ref/uap10.0/PullToRefresh.UWP.winmd": {}
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
+        },
+        "runtime": {
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -6886,9 +6898,12 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "PullToRefresh.UWP/0.3.3": {
+      "NotificationsExtensions/1.0.0": {
         "compile": {
-          "ref/uap10.0/PullToRefresh.UWP.winmd": {}
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
+        },
+        "runtime": {
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -8559,9 +8574,12 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "PullToRefresh.UWP/0.3.3": {
+      "NotificationsExtensions/1.0.0": {
         "compile": {
-          "ref/uap10.0/PullToRefresh.UWP.winmd": {}
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
+        },
+        "runtime": {
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -10227,9 +10245,12 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "PullToRefresh.UWP/0.3.3": {
+      "NotificationsExtensions/1.0.0": {
         "compile": {
-          "ref/uap10.0/PullToRefresh.UWP.winmd": {}
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
+        },
+        "runtime": {
+          "lib/portable-wpa81+win81/NotificationsExtensions.winmd": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -11710,7 +11731,7 @@
       ]
     },
     "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-      "sha512": "fNCAjIwvbTV+G0dT14bgM5tptsqeSaKQaCrlq7QknOq1Xdm8ZmgsDYddMgXkvykyKLjWyU6fKuOpj6fsQJy+wQ==",
+      "sha512": "NvBQnFeiFd0O1QdBz06UGApD7zn7ztVi7qO18IsM3EjiXRNgfrEBXB+azNm8XqLY8xGFAqh3HAuSd/wHZMe0XA==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -12378,35 +12399,15 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "PullToRefresh.UWP/0.3.3": {
-      "sha512": "3jM9lZQs/OinvRQcq0k633YzMJIy40BNEwK/SbTqXGmNveuFFdTezv5gaEI9LqLRJY8j/Ya5shPancrd5IZx/w==",
+    "NotificationsExtensions/1.0.0": {
+      "sha512": "Xae9eltquOiBk+XxgsPLB3heTs8zOLpjy2Af/7u8WBM3WwDgNt5zXGh0dzgdczAzmF/GeZiyQr//SfOoQBIRbQ==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
         "_rels/.rels",
-        "build/uap10.0/lib/win10-ARM/PullToRefresh.UWP.pri",
-        "build/uap10.0/lib/win10-ARM/PullToRefresh.UWP.winmd",
-        "build/uap10.0/lib/win10-ARM/PullToRefresh.UWP/Properties/PullToRefresh.UWP.rd.xml",
-        "build/uap10.0/lib/win10-ARM/PullToRefresh.UWP/PullToRefresh.UWP.xr.xml",
-        "build/uap10.0/lib/win10-ARM/PullToRefresh.UWP/Themes/Generic.xbf",
-        "build/uap10.0/lib/win10-x64/PullToRefresh.UWP.pri",
-        "build/uap10.0/lib/win10-x64/PullToRefresh.UWP.winmd",
-        "build/uap10.0/lib/win10-x64/PullToRefresh.UWP/Properties/PullToRefresh.UWP.rd.xml",
-        "build/uap10.0/lib/win10-x64/PullToRefresh.UWP/PullToRefresh.UWP.xr.xml",
-        "build/uap10.0/lib/win10-x64/PullToRefresh.UWP/Themes/Generic.xbf",
-        "build/uap10.0/lib/win10-x86/PullToRefresh.UWP.pri",
-        "build/uap10.0/lib/win10-x86/PullToRefresh.UWP.winmd",
-        "build/uap10.0/lib/win10-x86/PullToRefresh.UWP/Properties/PullToRefresh.UWP.rd.xml",
-        "build/uap10.0/lib/win10-x86/PullToRefresh.UWP/PullToRefresh.UWP.xr.xml",
-        "build/uap10.0/lib/win10-x86/PullToRefresh.UWP/Themes/Generic.xbf",
-        "build/uap10.0/PullToRefresh.UWP.targets",
-        "package/services/metadata/core-properties/96bd1c3b8eff4e67ad21a399453f644f.psmdcp",
-        "PullToRefresh.UWP.nuspec",
-        "ref/uap10.0/PullToRefresh.UWP.pri",
-        "ref/uap10.0/PullToRefresh.UWP.winmd",
-        "ref/uap10.0/PullToRefresh.UWP/Properties/PullToRefresh.UWP.rd.xml",
-        "ref/uap10.0/PullToRefresh.UWP/PullToRefresh.UWP.xr.xml",
-        "ref/uap10.0/PullToRefresh.UWP/Themes/Generic.xbf"
+        "lib/portable-wpa81+win81/NotificationsExtensions.winmd",
+        "NotificationsExtensions.nuspec",
+        "package/services/metadata/core-properties/f0fb5871d757491abc2d64580f6b9cfe.psmdcp"
       ]
     },
     "System.AppContext/4.0.0": {
@@ -15122,8 +15123,7 @@
       "Microsoft.ApplicationInsights >= 1.0.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
-      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "PullToRefresh.UWP >= 0.3.3"
+      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0"
     ],
     "UAP,Version=v10.0": []
   }

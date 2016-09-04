@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -14,6 +18,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ZhiHuDaily.UWP.Background;
+using ZhiHuDaily.UWP.Core.Https;
 using ZhiHuDaily.UWP.Core.Share;
 
 namespace ZhiHuDaily.UWP.Mobile
@@ -33,8 +39,9 @@ namespace ZhiHuDaily.UWP.Mobile
                 Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
-            this.Suspending += OnSuspending; 
-            
+            this.Suspending += OnSuspending;
+            this.Resuming += OnResuming;
+            new BackgroundProxy().Register();
         }
 
         /// <summary>
@@ -44,38 +51,8 @@ namespace ZhiHuDaily.UWP.Mobile
         /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
-
-
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            // 不要在窗口已包含内容时重复应用程序初始化，
-            // 只需确保窗口处于活动状态
-            if (rootFrame == null)
-            {
-                // 创建要充当导航上下文的框架，并导航到第一页
-                rootFrame = new Frame();
-
-                rootFrame.NavigationFailed += OnNavigationFailed;
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: 从之前挂起的应用程序加载状态
-                }
-
-                // 将框架放在当前窗口中
-                Window.Current.Content = rootFrame;
-            }
-
-            if (rootFrame.Content == null)
-            {
-                // 当导航堆栈尚未还原时，导航到第一页，
-                // 并通过将所需信息作为导航参数传入来配置
-                // 参数
-                rootFrame.Navigate(typeof(SplashPage), e.Arguments);
-            }
-            // 确保当前窗口处于活动状态
-            Window.Current.Activate();
+            base.OnLaunched(e);
+            InitContent(e.Arguments);
         }
 
         /// <summary>
@@ -101,17 +78,80 @@ namespace ZhiHuDaily.UWP.Mobile
             //TODO: 保存应用程序状态并停止任何后台活动
             deferral.Complete();
         }
-
-
         /// <summary>
-        /// 文件唤醒APP
+        /// APP恢复
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnResuming(object sender, object e)
+        {
+            
+        }
+        /// <summary>
+        /// 文件唤醒
         /// </summary>
         /// <param name="args"></param>
         protected override void OnFileActivated(FileActivatedEventArgs args)
         {
             base.OnFileActivated(args);
+            InitContent(args);
+            new WeChatResponseHandler().Handle(args as FileActivatedEventArgs);  //处理文件
+        }
+        /// <summary>
+        /// toast通知唤醒
+        /// </summary>
+        /// <param name="args"></param>
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+            InitContent(args);
+            if (args.Kind == ActivationKind.ToastNotification)  //处理通知
+            {
+                //... 没做跳转
+            }
+        }
+        /// <summary>
+        /// 初始化内容
+        /// </summary>
+        private async void InitContent(object arg)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
 
-            new WeChatResponseHandler().Handle(args);  //处理文件
+            // 不要在窗口已包含内容时重复应用程序初始化，
+            // 只需确保窗口处于活动状态
+            if (rootFrame == null)
+            {
+                // 创建要充当导航上下文的框架，并导航到第一页
+                rootFrame = new Frame();
+
+                rootFrame.NavigationFailed += OnNavigationFailed;
+                // 将框架放在当前窗口中
+                Window.Current.Content = rootFrame;
+            }
+
+            if (rootFrame.Content == null)
+            {
+                // 当导航堆栈尚未还原时，导航到第一页，
+                // 并通过将所需信息作为导航参数传入来配置
+                // 参数
+                rootFrame.Navigate(typeof(SplashPage), arg);
+            }
+            // 确保当前窗口处于活动状态
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+
+                var statusBar = StatusBar.GetForCurrentView();
+                if (statusBar != null)
+                {
+                    //statusBar.BackgroundOpacity = 1;
+                    //Windows.UI.Color c = (Application.Current.Resources.ThemeDictionaries["SystemControlHighlightAltListAccentLowBrush"] as SolidColorBrush).Color;
+                    //statusBar.BackgroundColor = Windows.UI.Colors.Transparent;
+                    //statusBar.ForegroundColor = Windows.UI.Colors.White;
+
+                    await statusBar.HideAsync();
+                }
+            }
+            Window.Current.Activate();
         }
     }
 }

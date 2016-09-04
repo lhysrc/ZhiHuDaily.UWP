@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -29,7 +30,6 @@ namespace ZhiHuDaily.UWP.Mobile
     public sealed partial class MainPage : Page
     {
         MainViewModel _viewModel;
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -43,7 +43,7 @@ namespace ZhiHuDaily.UWP.Mobile
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
+        private async void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
             if (!sptViewNavigation.IsSwipeablePaneOpen)
             {
@@ -53,7 +53,19 @@ namespace ZhiHuDaily.UWP.Mobile
                 }
                 else
                 {
-
+                    if (popTips.IsOpen)  //第二次按back键
+                    {
+                        Application.Current.Exit();
+                    }
+                    else
+                    {
+                        popTips.IsOpen = true;  //提示再按一次
+                        popTips.HorizontalOffset = this.ActualWidth / 2 - 45;  //居中
+                        popTips.VerticalOffset = this.ActualHeight / 2 - 5;
+                        e.Handled = true;
+                        await Task.Delay(1000);  //1000ms后关闭提示
+                        popTips.IsOpen = false;
+                    }
                 }
             }
             else
@@ -92,6 +104,20 @@ namespace ZhiHuDaily.UWP.Mobile
                 {
                     this.frmPages.Navigate(typeof(ThemePage), new object[] { theme });
                 }
+                //ListViewItem item_ui = null;
+                //foreach(var item in listTheme.Items)
+                //{
+                //    item_ui = ((ListViewItem)(listTheme.ContainerFromItem(item)));
+                //    if (item_ui != null)
+                //    {
+                //        item_ui.Background = listTheme.Background;
+                //    }
+                //}
+                //item_ui = ((ListViewItem)(listTheme.ContainerFromItem(theme)));
+                //if (item_ui != null)
+                //{
+                //    item_ui.Background = Application.Current.Resources["SystemControlHighlightAltListAccentLowBrush"] as SolidColorBrush;
+                //}
                 sptViewNavigation.IsSwipeablePaneOpen = false;
             }
         }
@@ -141,7 +167,7 @@ namespace ZhiHuDaily.UWP.Mobile
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void appbtnBack_Click(object sender, RoutedEventArgs e)
+        private async void appbtnBack_Click(object sender, RoutedEventArgs e)
         {
             if (!sptViewNavigation.IsSwipeablePaneOpen)
             {
@@ -151,7 +177,18 @@ namespace ZhiHuDaily.UWP.Mobile
                 }
                 else
                 {
-
+                    if (popTips.IsOpen)  //第二次按back键
+                    {
+                        Application.Current.Exit();
+                    }
+                    else
+                    {
+                        popTips.IsOpen = true;  //提示再按一次
+                        popTips.HorizontalOffset = this.ActualWidth / 2 - 45;  //居中
+                        popTips.VerticalOffset = this.ActualHeight / 2 - 5;
+                        await Task.Delay(1000);  //1000ms后关闭提示
+                        popTips.IsOpen = false;
+                    }
                 }
             }
             sptViewNavigation.IsSwipeablePaneOpen = false;
@@ -180,14 +217,36 @@ namespace ZhiHuDaily.UWP.Mobile
         /// <param name="e"></param>
         private void frmPages_Navigated(object sender, NavigationEventArgs e)
         {
-            if (e.SourcePageType.Equals(typeof(HomePage)) || e.SourcePageType.Equals(typeof(ThemePage)))
-            {
-                appbtnRefresh.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                appbtnRefresh.Visibility = Visibility.Collapsed;
-            }
+            //if (e.SourcePageType.Equals(typeof(HomePage)) || e.SourcePageType.Equals(typeof(ThemePage)))
+            //{
+            //    appbtnRefresh.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    appbtnRefresh.Visibility = Visibility.Collapsed;
+            //}
+        }
+        /// <summary>
+        /// 打开收藏界面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void favo_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!this.frmPages.Content.GetType().Equals(typeof(CollectionPage)))
+                this.frmPages.Navigate(typeof(CollectionPage));
+            sptViewNavigation.IsSwipeablePaneOpen = false;
+        }
+        /// <summary>
+        /// 打开设置界面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void setting_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!this.frmPages.Content.GetType().Equals(typeof(SettingPage)))
+                this.frmPages.Navigate(typeof(SettingPage));
+            sptViewNavigation.IsSwipeablePaneOpen = false;
         }
     }
     /// <summary>

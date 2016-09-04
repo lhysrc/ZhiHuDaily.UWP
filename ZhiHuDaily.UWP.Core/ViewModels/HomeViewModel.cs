@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using ZhiHuDaily.UWP.Core.Data;
 using ZhiHuDaily.UWP.Core.Https;
@@ -146,6 +147,7 @@ namespace ZhiHuDaily.UWP.Core.ViewModels
 
                 Stories = c;
                 Top_Stories = ls.Top_Stories;
+
                 Title = "首页";
 
                 c.DataLoaded += C_DataLoaded;
@@ -174,7 +176,8 @@ namespace ZhiHuDaily.UWP.Core.ViewModels
         private void Current_ShareDataChanged()
         {
             APPTheme = DataShareManager.Current.APPTheme;
-            Stories.ToList().ForEach((s) => s.Readed = s.Readed);
+            if (Stories != null)
+                Stories.ToList().ForEach((s) => s.Readed = s.Readed);
         }
 
     }
